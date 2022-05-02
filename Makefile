@@ -87,4 +87,13 @@ lint-yaml:
 		if (($$?==0)) ; then echo "congratulations ,all pass" ; else echo "error, pealse refer <https://yamllint.readthedocs.io/en/stable/rules.html> " ; fi
 
 
+.PHONY: unitest-tests
+unitest-tests:
+	@echo "run unitest-tests"
+	$(QUIET) $(ROOT_DIR)/tools/ginkgo.sh   \
+		--cover --coverprofile=./coverage.out --covermode set  \
+		--json-report unitestreport.json \
+		-randomize-suites -randomize-all --keep-going  --timeout=1h  -p   --slow-spec-threshold=120s \
+		-vv  -r   $(ROOT_DIR)/cmd
+	$(QUIET) go tool cover -html=./coverage.out -o coverage-all.html
 
