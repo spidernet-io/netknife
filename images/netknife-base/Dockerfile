@@ -11,9 +11,13 @@ ARG UBUNTU_IMAGE=docker.io/library/ubuntu:20.04@sha256:bea6d19168bbfd6af8d77c2cc
 FROM --platform=${BUILDPLATFORM} ${GOLANG_IMAGE} as gops-cni-builder
 COPY /build-gops.sh /build-gops.sh
 
+ARG USE_PROXY_SOURCE
 #use alibaba debian source
-#COPY /sources.list /etc/apt/sources.list
-#RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 648ACFD622F3D138
+COPY /sources.list /sources.list
+RUN [ "$USE_PROXY_SOURCE" != "true" ] && exit 0 ; \
+      rm -f /etc/apt/sources.list ; \
+      cp /sources.list /etc/apt/sources.list ;  \
+      apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 648ACFD622F3D138
 
 #with debian 11 os
 RUN apt-get update && apt-get install -y binutils-aarch64-linux-gnu binutils-x86-64-linux-gnu

@@ -25,6 +25,7 @@ build_local_base_image:
 	@ TAG=` git ls-tree --full-tree HEAD -- $(IMAGEDIR) | awk '{ print $$3 }' ` ; \
 		echo "Build base image with tag: $${TAG}" ; \
 		docker buildx build  \
+				--build-arg USE_PROXY_SOURCE=true \
 				--file $(IMAGEDIR)/Dockerfile \
 				--output type=docker \
 				--tag $(BASE_IMAGES):$${TAG}  $(IMAGEDIR) ; \
