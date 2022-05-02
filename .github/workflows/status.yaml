@@ -38,15 +38,3 @@ jobs:
           label: Code Lines
           message: ${{ env.CODE_LINES }}
           color: lightgrey
-
-      - name: Create Comments-Badge
-        uses: schneegans/dynamic-badges-action@v1.3.0
-        with:
-          auth: ${{ secrets.WELAN_PAT }}
-          gistID: 88f681fd120de70f34896aa943b52d66
-          filename: netknifecomment.json
-          label: Comments
-          message: ${{ env.COMMENT_PERCENTAGE }}%
-          valColorRange: ${{ env.COMMENT_PERCENTAGE }}
-          maxColorRange: 100
-          minColorRange: 0
