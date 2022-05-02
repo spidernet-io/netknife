@@ -56,12 +56,12 @@ jobs:
       ref: ${{ needs.get-tag.outputs.tag }}
       push: 'true'
 
-  release-chart:
-    needs: [build-release-image, get-tag]
-    uses: ./.github/workflows/call-release-chart.yaml
-    with:
-      ref: ${{ needs.get-tag.outputs.tag }}
-      submit: true
+  # release-chart:
+  #   needs: [build-release-image, get-tag]
+  #   uses: ./.github/workflows/call-release-chart.yaml
+  #   with:
+  #     ref: ${{ needs.get-tag.outputs.tag }}
+  #     submit: true
 
   release-changelog:
     needs: [build-release-image, get-tag]
@@ -69,11 +69,11 @@ jobs:
     with:
       dest_tag: ${{ needs.get-tag.outputs.tag }}
 
-  release-doc:
-    needs: [build-release-image, get-tag]
-    uses: ./.github/workflows/call-release-doc.yaml
-    with:
-      ref: ${{ needs.get-tag.outputs.tag }}
+  # release-doc:
+  #   needs: [build-release-image, get-tag]
+  #   uses: ./.github/workflows/call-release-doc.yaml
+  #   with:
+  #     ref: ${{ needs.get-tag.outputs.tag }}
 
   create-release:
     needs: [release-chart, release-changelog, get-tag]
