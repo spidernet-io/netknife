@@ -52,3 +52,39 @@ build_local_base_image:
 				--tag $(BASE_IMAGES):$${TAG}  $(IMAGEDIR) ; \
 		(($$?==0)) || { echo "error , failed to build base image" ; exit 1 ;} ; \
 		echo "build success $(BASE_IMAGES):$${TAG} "
+
+
+
+.PHONY: lint-golang
+lint-golang:
+	$(QUIET) tools/check-go-fmt.sh
+	$(QUIET) $(GO_VET)  ./cmd/...
+	$(QUIET) golangci-lint run
+
+
+
+.PHONY: lint-markdown-format
+lint-markdown-format:
+	@$(CONTAINER_ENGINE) container run --rm \
+		--entrypoint sh -v $(ROOT_DIR):/workdir ghcr.io/igorshubovych/markdownlint-cli:latest \
+		-c '/usr/local/bin/markdownlint -c /workdir/.github/markdownlint.yaml -p /workdir/.github/markdownlintignore  /workdir/' ; \
+		if (($$?==0)) ; then echo "congratulations ,all pass" ; else echo "error, pealse refer <https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md> " ; fi
+
+
+.PHONY: fix-markdown-format
+fix-markdown-format:
+	@$(CONTAINER_ENGINE) container run --rm  \
+		--entrypoint sh -v $(ROOT_DIR):/workdir ghcr.io/igorshubovych/markdownlint-cli:latest \
+		-c '/usr/local/bin/markdownlint -f -c /workdir/.github/markdownlint.yaml -p /workdir/.github/markdownlintignore  /workdir/'
+
+
+
+.PHONY: lint-yaml
+lint-yaml:
+	@$(CONTAINER_ENGINE) container run --rm \
+		--entrypoint sh -v $(ROOT_DIR):/data cytopia/yamllint \
+		-c '/usr/bin/yamllint -c /data/.github/yamllint-conf.yml /data' ; \
+		if (($$?==0)) ; then echo "congratulations ,all pass" ; else echo "error, pealse refer <https://yamllint.readthedocs.io/en/stable/rules.html> " ; fi
+
+
+
