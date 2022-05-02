@@ -35,6 +35,7 @@ image including kinds of tools:
 * iperf3
 * netperf
 * dig
+* nslookup
 * dnsperf
 * caddy
 * fortio
