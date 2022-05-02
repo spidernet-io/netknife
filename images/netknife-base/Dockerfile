@@ -32,7 +32,6 @@ FROM ${UBUNTU_IMAGE} as rootfs
 COPY /install-others.sh /install-others.sh
 COPY /configure-iptables-wrapper.sh /configure-iptables-wrapper.sh
 COPY /iptables-wrapper /usr/sbin/iptables-wrapper
-COPY /test-image.sh /test-image.sh
 
 #fix warning: debconf: delaying package configuration, since apt-utils is not installed
 ARG DEBIAN_FRONTEND=noninteractive
