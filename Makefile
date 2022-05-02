@@ -23,7 +23,7 @@ build_local_image:
 build_local_base_image: IMAGEDIR := ./images/netknife-base
 build_local_base_image:
 	@ TAG=` git ls-tree --full-tree HEAD -- $(IMAGEDIR) | awk '{ print $$3 }' ` ; \
-		echo "Build base image with tag: $$(TAG)" ; \
+		echo "Build base image with tag: $${TAG}" ; \
 		docker buildx build  \
 				--file $(IMAGEDIR)/Dockerfile \
 				--output type=docker \
