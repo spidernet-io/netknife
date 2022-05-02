@@ -20,15 +20,13 @@ build_local_image:
 	done
 
 .PHONY: build_local_base_image
+build_local_base_image: IMAGEDIR := ./images/netknife-base
 build_local_base_image:
-	@ echo "Build Image with tag: $(GIT_COMMIT_VERSION)"
-	@ TAG=` git ls-tree --full-tree HEAD -- ./images/netknife-base | awk '{ print $3 }' ` ; \
+	@ TAG=` git ls-tree --full-tree HEAD -- $(IMAGEDIR) | awk '{ print $$3 }' ` ; \
+		echo "Build base image with tag: $$(TAG)" ; \
 		docker buildx build  \
-				--build-arg GIT_COMMIT_VERSION=$(GIT_COMMIT_VERSION) \
-				--build-arg GIT_COMMIT_TIME=$(GIT_COMMIT_TIME) \
-				--build-arg VERSION=$(GIT_COMMIT_VERSION) \
-				--file ./images/netknife-base/Dockerfile \
+				--file $(IMAGEDIR)/Dockerfile \
 				--output type=docker \
-				--tag $(BASE_IMAGES):$${TAG}  ./images/netknife-base ; \
-		(($?==0)) || { echo "error , failed to build base image" ; exit 1 ;} ; \
+				--tag $(BASE_IMAGES):$${TAG}  $(IMAGEDIR) ; \
+		(($$?==0)) || { echo "error , failed to build base image" ; exit 1 ;} ; \
 		echo "build success $(BASE_IMAGES):$${TAG} "
