@@ -29,10 +29,6 @@ RUN  make GOARCH=${TARGETARCH}   \
 
 RUN chmod +x /src/scripts/*
 
-#====== tonador tools =======
-
-FROM fortio/fortio:1.27.0 as fortio
-
 
 #====== release image =======
 
@@ -54,6 +50,5 @@ ENV VERSION=${VERSION}
 
 COPY --from=builder /tmp/install/${TARGETOS}/${TARGETARCH}/bin/*   /usr/bin/
 COPY --from=builder /src/scripts   /scripts
-COPY --from=fortio /usr/bin/fortio /usr/bin/fortio
 
 CMD ["/scripts/startHttp"]
