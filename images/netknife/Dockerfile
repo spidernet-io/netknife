@@ -33,6 +33,7 @@ RUN chmod +x /src/scripts/*
 
 FROM fortio/fortio:1.27.0 as fortio
 
+
 #====== release image =======
 
 FROM ${BASE_IMAGE}

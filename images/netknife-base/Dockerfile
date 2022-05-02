@@ -5,7 +5,7 @@
 
 
 ARG GOLANG_IMAGE=docker.io/library/golang:1.17.8@sha256:f675106e44f205a7284e15cd75c41b241329f3c03ac30b0ba07b14a6ea7c99d9
-ARG UBUNTU_IMAGE=docker.io/library/ubuntu:20.04@sha256:bea6d19168bbfd6af8d77c2cc3c572114eb5d113e6f422573c93cb605a0e2ffb
+ARG UBUNTU_IMAGE=docker.io/library/ubuntu:22.04@sha256:26c68657ccce2cb0a31b330cb0be2b5e108d467f641c62e13ab40cbec258c68d
 
 #========= build gops ===============
 FROM --platform=${BUILDPLATFORM} ${GOLANG_IMAGE} as gops-cni-builder
@@ -46,11 +46,15 @@ COPY --from=gops-cni-builder /out/${TARGETPLATFORM}/bin/gops /bin/gops
 
 RUN chmod +x /install-others.sh && /install-others.sh && rm -f /install-others.sh
 
+#============
+FROM caddy:2.5.0 as caddy
+
 
 #============
 FROM scratch
 LABEL maintainer="maintainer@spidernet-io"
 COPY --from=rootfs / /
+COPY --from=caddy /usr/bin/caddy /usr/bin/caddy
 
 
 
