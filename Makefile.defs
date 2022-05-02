@@ -1,0 +1,7 @@
+
+VERSION = $(shell cat $(dir $(lastword $(MAKEFILE_LIST)))/VERSION)
+
+GIT_COMMIT_VERSION = $(shell git show -s --format='format:%H')
+GIT_COMMIT_TIME = $(shell git show -s --format='format:%aI')
+
+FULL_BUILD_VERSION = $(VERSION) $(GIT_COMMIT_VERSION)
