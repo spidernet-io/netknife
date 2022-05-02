@@ -6,12 +6,14 @@ BIN_SUBDIRS := cmd/tornado
 .PHONY: all build-bin
 all: build-bin
 build-bin:
-	mkdir -p $(DESTDIR_BIN)
-	for ITEM in $(BIN_SUBDIRS); do \
-  		BIN_NAME=$${ITEM##*/} ; \
+	@ mkdir -p $(DESTDIR_BIN)
+	@ for ITEM in $(BIN_SUBDIRS); do \
+  		BIN_NAME="$${ITEM##*/}" ; \
   		rm -f $(DESTDIR_BIN)/$${BIN_NAME} ; \
   		$(GO_BUILD) -o $(DESTDIR_BIN)/$${BIN_NAME}  $${ITEM}/main.go ; \
-  		done
+  		(($$?!=0)) && echo "error, failed to build $${ITEM}" && exit 1 ; \
+  		echo "succeeded to build $${BIN_NAME} to $(DESTDIR_BIN)/$${BIN_NAME}" ; \
+  	    done
 
 
 
