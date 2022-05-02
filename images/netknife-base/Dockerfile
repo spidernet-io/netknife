@@ -39,14 +39,12 @@ ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get upgrade -y
 
 WORKDIR /
-RUN chmod +x /install-others.sh && /install-others.sh && rm -f /install-others.sh
 RUN chmod +x /configure-iptables-wrapper.sh && /configure-iptables-wrapper.sh && rm -f /configure-iptables-wrapper.sh
 
 ARG TARGETPLATFORM
 COPY --from=gops-cni-builder /out/${TARGETPLATFORM}/bin/gops /bin/gops
 
-#test result
-RUN chmod +x /test-image.sh && /test-image.sh && rm -f /test-image.sh
+RUN chmod +x /install-others.sh && /install-others.sh && rm -f /install-others.sh
 
 
 #============
