@@ -21,9 +21,9 @@ on:
   workflow_dispatch:
     inputs:
       ref:
-        description: 'sha, Tag'
+        description: 'sha, tag, branch'
         required: true
-        default: v1.0.0
+        default: main
 
 
 permissions: write-all
