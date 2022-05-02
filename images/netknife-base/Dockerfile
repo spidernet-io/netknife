@@ -5,7 +5,7 @@
 
 
 ARG GOLANG_IMAGE=docker.io/library/golang:1.17.8@sha256:f675106e44f205a7284e15cd75c41b241329f3c03ac30b0ba07b14a6ea7c99d9
-ARG UBUNTU_IMAGE=docker.io/library/ubuntu:22.04@sha256:26c68657ccce2cb0a31b330cb0be2b5e108d467f641c62e13ab40cbec258c68d
+ARG UBUNTU_IMAGE=docker.io/library/ubuntu:21.10@sha256:14d8cab8d7bd72a01e225cd85bf37bbf08bf88115769316fa86c776df4ea5fed
 
 #========= build gops ===============
 FROM --platform=${BUILDPLATFORM} ${GOLANG_IMAGE} as gops-cni-builder

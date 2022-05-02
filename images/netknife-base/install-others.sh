@@ -69,13 +69,14 @@ ss -v
 tc -V
 netstat --version
 arping -h
-iftop  -h &>/dev/null
+iftop  -h
 conntrack --version
 # Can't initialize ipvs: Permission denied (you must be root)
-which ipvsadm >/dev/null
-which telnet >/dev/null
-which nc >/dev/null
-lsof -h >/dev/null
+which ipvsadm
+which telnet
+which nc
+which ssmping
+lsof -h
 ping -V
 ping6 -V
 tracepath -V
@@ -84,7 +85,6 @@ curl -V
 socat -V
 nping -V
 nmap -V
-ssmping -v
 ethtool --version
 jq -V
 stress-ng -V
