@@ -11,7 +11,6 @@ GINKGO_PKG_PATH=${GINKGO_PKG_PATH:-${CURRENT_DIR_PATH}/../vendor/github.com/onsi
 # git branch
 # git show -s --format='format:%H'
 
-
 if which ginkgo &>/dev/null ; then
   ginkgo $@
 elif [ -f "$GINKGO_PKG_PATH" ] ; then
