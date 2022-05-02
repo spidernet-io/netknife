@@ -14,7 +14,7 @@ packages=(
   # Additional iproute2 runtime dependencies
   libelf1
   libmnl0
-  bash-completion
+  #bash-completion
   iptables
   # ss
   iproute2
@@ -61,10 +61,16 @@ rm -rf /var/lib/apt/lists/*
 
 #========= verify
 
-iptables-legacy --version
-iptables-nft --version
-ip6tables-legacy --version
-ip6tables-nft --version
+# maybe fail to call on building machine
+#iptables-legacy --version
+#iptables-nft --version
+#ip6tables-legacy --version
+#ip6tables-nft --version
+which iptables-legacy
+which iptables-nft
+which ip6tables-legacy
+which ip6tables-nft
+
 ss -v
 tc -V
 netstat --version
@@ -91,15 +97,15 @@ stress-ng -V
 lspci --version
 iperf3 -v
 netperf -V
+
 #
 #echo 'ENABLED="true"' > /etc/default/sysstat
 #service sysstat restart
 #sar -V
 #
+
 dig -v
 dnsperf -h
 
 
 exit 0
-
-
