@@ -22,7 +22,7 @@ build_local_image:
 .PHONY: build_local_base_image
 build_local_base_image:
 	@ echo "Build Image with tag: $(GIT_COMMIT_VERSION)"
- 	@ TAG=$$(git ls-tree --full-tree HEAD -- ./images/netknife-base | awk '{ print $3 }') ; \
+ 	@ TAG=` git ls-tree --full-tree HEAD -- ./images/netknife-base | awk '{ print $3 }' ` ; \
 		docker buildx build  \
 				--build-arg GIT_COMMIT_VERSION=$(GIT_COMMIT_VERSION) \
 				--build-arg GIT_COMMIT_TIME=$(GIT_COMMIT_TIME) \
