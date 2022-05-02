@@ -63,7 +63,7 @@ jobs:
       dest_tag: ${{ needs.get-tag.outputs.tag }}
 
   create-release:
-    needs: [release-chart, release-changelog, get-tag]
+    needs: [release-changelog, get-tag]
     name: create release
     runs-on: ubuntu-latest
     steps:
