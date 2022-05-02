@@ -1,4 +1,4 @@
-
+include Makefile.defs
 
 REGISTER ?= ghcr.io
 GIT_REPO ?= spidernet-io/netknife
@@ -30,4 +30,5 @@ build_local_base_image:
 				--file ./images/netknife-base/Dockerfile \
 				--output type=docker \
 				--tag $(BASE_IMAGES):$${TAG}  ./images/netknife-base ; \
+		(($?==0)) || { echo "error , failed to build base image" ; exit 1 ;} ; \
 		echo "build success $(BASE_IMAGES):$${TAG} "
