@@ -1,6 +1,7 @@
 # porter
 
 Serves requested data on ports specified in environment variables of the form `SERVE_{PORT,TLS_PORT,SCTP_PORT}_[NNNN]`. eg:
+
 - `SERVE_PORT_9001` - serve TCP connections on port 9001
 - `SERVE_TLS_PORT_9002` - serve TLS-encrypted TCP connections on port 9002
 - `SERVE_SCTP_PORT_9003` - serve SCTP connections on port 9003

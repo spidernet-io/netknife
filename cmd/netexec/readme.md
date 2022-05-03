@@ -9,21 +9,21 @@ Starts a HTTP(S) server on given port with the following endpoints:
   failed request responses). Returns `200 OK` status code if the last request succeeded,
   `417 Expectation Failed` if it did not, or `400 Bad Request` if any of the endpoint's parameters
   is invalid. The endpoint's parameters are:
-    - `host`: The host that will be dialed.
-    - `port`: The port that will be dialed.
-    - `request`: The HTTP endpoint or data to be sent through UDP. If not specified, it will result
+  - `host`: The host that will be dialed.
+  - `port`: The port that will be dialed.
+  - `request`: The HTTP endpoint or data to be sent through UDP. If not specified, it will result
       in a `400 Bad Request` status code being returned.
-    - `protocol`: The protocol which will be used when making the request. Default value: `http`.
+  - `protocol`: The protocol which will be used when making the request. Default value: `http`.
       Acceptable values: `http`, `udp`, `sctp`.
-    - `tries`: The number of times the request will be performed. Default value: `1`.
+  - `tries`: The number of times the request will be performed. Default value: `1`.
 - `/echo`: Returns the given `msg` (`/echo?msg=echoed_msg`), with the optional status `code`.
 - `/exit`: Closes the server with the given code and graceful shutdown. The endpoint's parameters
   are:
-    - `code`: The exit code for the process. Default value: 0. Allows an integer [0-127].
-    - `timeout`: The amount of time to wait for connections to close before shutting down.
+  - `code`: The exit code for the process. Default value: 0. Allows an integer [0-127].
+  - `timeout`: The amount of time to wait for connections to close before shutting down.
       Acceptable values are golang durations. If 0 the process will exit immediately without
       shutdown.
-    - `wait`: The amount of time to wait before starting shutdown. Acceptable values are
+  - `wait`: The amount of time to wait before starting shutdown. Acceptable values are
       golang durations. If 0 the process will start shutdown immediately.
 - `/healthz`: Returns `200 OK` if the server is ready, `412 Status Precondition Failed`
   otherwise. The server is considered not ready if the UDP server did not start yet or
