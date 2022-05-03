@@ -1,20 +1,16 @@
 include Makefile.defs
 
-BIN_SUBDIRS := cmd/tornado
-
-
 .PHONY: all build-bin
 all: build-bin
 build-bin:
 	@ mkdir -p $(DESTDIR_BIN)
-	@ for ITEM in $(BIN_SUBDIRS); do \
-  		BIN_NAME="$${ITEM##*/}" ; \
+	@ BIN_NAME_LIST=`cd cmd && ls ` ; \
+	 for BIN_NAME in $$(BIN_NAME_LIST); do \
   		rm -f $(DESTDIR_BIN)/$${BIN_NAME} ; \
-  		$(GO_BUILD) -o $(DESTDIR_BIN)/$${BIN_NAME}  $${ITEM}/main.go ; \
-  		(($$?!=0)) && echo "error, failed to build $${ITEM}" && exit 1 ; \
+  		$(GO_BUILD) -o $(DESTDIR_BIN)/$${BIN_NAME}  cmd/$${BIN_NAME}/main.go ; \
+  		(($$?!=0)) && echo "error, failed to build $${BIN_NAME}" && exit 1 ; \
   		echo "succeeded to build $${BIN_NAME} to $(DESTDIR_BIN)/$${BIN_NAME}" ; \
-  	    done
-
+  	 done
 
 
 # ==========================

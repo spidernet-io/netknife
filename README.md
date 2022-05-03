@@ -5,6 +5,8 @@
 
 image including kinds of tools:
 
+## standard CLI
+
 * iptables-legacy
 * iptables-nft
 * ip6tables-legacy
@@ -39,3 +41,7 @@ image including kinds of tools:
 * dnsperf
 * caddy
 * fortio
+
+## other tools
+
+lots of tools in /scripts and /cmd
